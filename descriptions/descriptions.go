@@ -13,7 +13,7 @@ func AgentCpu() collection.DescCollection {
 		BaseXpath: "CpuLoadInfoResp/cpu_info/CpuLoadInfo/cpuload",
 		DescElt: collection.DescElement{
 			ShortDetailXpath: "one_min_avg/text()",
-			LongDetail:       collection.LongFormatValues([]string{"fifteen_min_avg", "five_min_avg", "one_min_avg"}),
+			LongDetail:       collection.LongFormatValuesXpaths([]string{"fifteen_min_avg", "five_min_avg", "one_min_avg"}),
 		},
 		PageArgs: []string{"vrouter-fqdn"},
 		PageBuilder: func(args []string) collection.Sourcer {
@@ -22,6 +22,29 @@ func AgentCpu() collection.DescCollection {
 		},
 		PrimaryField: "node_name",
 	}
+}
+
+func XmppCount() collection.DescCollection {
+	return collection.DescCollection{
+		BaseXpath: "AgentXmppConnectionStatus/peer/list",
+		DescElt: collection.DescElement{
+			ShortDetailXpath: "controller_ip/text()",
+			LongDetail:       collection.LongFormatValuesFn(xmppCount),
+		},
+		PageArgs: []string{"vrouter-fqdn"},
+		PageBuilder: func(args []string) collection.Sourcer {
+			path := fmt.Sprintf("Snh_AgentXmppConnectionStatusReq")
+			return collection.Webui{Path: path, VrouterUrl: args[0], Port: 8085}
+		},
+		PrimaryField: "node_name",
+	}
+}
+func xmppCount(slice *[]string, e collection.Element) {
+	nodeName, _ := e.Node.Search("controller_ip/text()")
+	//fmt.Println(nodeName)
+	length := len(nodeName)
+	ls := fmt.Sprintf("%d", length)
+	*slice = []string{ls}
 }
 
 func CtrlIfmap() collection.DescCollection {

@@ -8,8 +8,8 @@ import "github.com/nlewo/contrail-introspect-cli/collection"
 //import "reflect"
 
 func main() {
-	//	intfDescCollection := descriptions.AgentCpu()
-	intfDescCollection := descriptions.AgentCpu()
+	intfDescCollection := descriptions.XmppCount()
+	//intfDescCollection := descriptions.Peering()
 	var page collection.Sourcer
 	args := []string{"172.25.151.84"}
 	page = intfDescCollection.PageBuilder(args)
@@ -20,6 +20,7 @@ func main() {
 	var list collection.Shower
 	list = col
 	vars := []string{}
+	list.Long(80)
 	list.Vars(&vars)
 	fmt.Print(vars)
 }

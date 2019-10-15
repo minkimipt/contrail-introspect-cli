@@ -88,8 +88,9 @@ type LongFormatter interface {
 }
 
 type LongFormatFn (func(*uitable.Table, Element))
+type LongFormatValuesFn (func(*[]string, Element))
 type LongFormatXpaths []string
-type LongFormatValues []string
+type LongFormatValuesXpaths []string
 
 type Format uint8
 
@@ -101,6 +102,10 @@ const (
 
 func (fn LongFormatFn) LongFormat(table *uitable.Table, format Format, e Element, slice *[]string) {
 	fn(table, e)
+}
+
+func (fn LongFormatValuesFn) LongFormat(table *uitable.Table, format Format, e Element, slice *[]string) {
+	fn(slice, e)
 }
 
 func (xpaths LongFormatXpaths) LongFormat(table *uitable.Table, format Format, e Element, slice *[]string) {
@@ -118,7 +123,7 @@ func (xpaths LongFormatXpaths) LongFormat(table *uitable.Table, format Format, e
 
 //TODO: here it would be ideal if we could pass an *[]slice type instead of *uitable.Table here,
 //but this requires interface to be introduced on the level where LongFormat is defined.
-func (xpaths LongFormatValues) LongFormat(table *uitable.Table, format Format, e Element, slice *[]string) {
+func (xpaths LongFormatValuesXpaths) LongFormat(table *uitable.Table, format Format, e Element, slice *[]string) {
 	for _, xpath := range xpaths {
 		s, _ := e.Node.Search(xpath + "/text()")
 		if len(s) == 1 {
