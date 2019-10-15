@@ -13,7 +13,7 @@ func AgentCpu() collection.DescCollection {
 		BaseXpath: "CpuLoadInfoResp/cpu_info/CpuLoadInfo/cpuload",
 		DescElt: collection.DescElement{
 			ShortDetailXpath: "one_min_avg/text()",
-			LongDetail:       collection.LongFormatXpaths([]string{"fifteen_min_avg", "five_min_avg", "one_min_avg"}),
+			LongDetail:       collection.LongFormatValues([]string{"fifteen_min_avg", "five_min_avg", "one_min_avg"}),
 		},
 		PageArgs: []string{"vrouter-fqdn"},
 		PageBuilder: func(args []string) collection.Sourcer {

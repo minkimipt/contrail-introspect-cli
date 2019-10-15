@@ -1,8 +1,11 @@
 package main
 
+import "fmt"
 import "log"
 import "github.com/nlewo/contrail-introspect-cli/descriptions"
 import "github.com/nlewo/contrail-introspect-cli/collection"
+
+//import "reflect"
 
 func main() {
 	//	intfDescCollection := descriptions.AgentCpu()
@@ -16,6 +19,7 @@ func main() {
 	}
 	var list collection.Shower
 	list = col
-	list.Short()
-	list.Long(80)
+	vars := []string{}
+	list.Vars(&vars)
+	fmt.Print(vars)
 }
