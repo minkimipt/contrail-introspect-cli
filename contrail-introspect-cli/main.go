@@ -5,7 +5,8 @@ import "github.com/nlewo/contrail-introspect-cli/descriptions"
 import "github.com/nlewo/contrail-introspect-cli/collection"
 
 func main() {
-	intfDescCollection := descriptions.Interface()
+	//	intfDescCollection := descriptions.AgentCpu()
+	intfDescCollection := descriptions.AgentCpu()
 	var page collection.Sourcer
 	args := []string{"172.25.151.84"}
 	page = intfDescCollection.PageBuilder(args)
@@ -15,5 +16,6 @@ func main() {
 	}
 	var list collection.Shower
 	list = col
+	list.Short()
 	list.Long(80)
 }

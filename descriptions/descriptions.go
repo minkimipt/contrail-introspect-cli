@@ -8,6 +8,22 @@ import "github.com/gosuri/uitable"
 import "github.com/nlewo/contrail-introspect-cli/utils"
 import "github.com/nlewo/contrail-introspect-cli/collection"
 
+func AgentCpu() collection.DescCollection {
+	return collection.DescCollection{
+		BaseXpath: "CpuLoadInfoResp/cpu_info/CpuLoadInfo/cpuload",
+		DescElt: collection.DescElement{
+			ShortDetailXpath: "one_min_avg/text()",
+			LongDetail:       collection.LongFormatXpaths([]string{"fifteen_min_avg", "five_min_avg", "one_min_avg"}),
+		},
+		PageArgs: []string{"vrouter-fqdn"},
+		PageBuilder: func(args []string) collection.Sourcer {
+			path := fmt.Sprintf("Snh_CpuLoadInfoReq")
+			return collection.Webui{Path: path, VrouterUrl: args[0], Port: 8085}
+		},
+		PrimaryField: "node_name",
+	}
+}
+
 func CtrlIfmap() collection.DescCollection {
 	return collection.DescCollection{
 		BaseXpath: "IFMapTableShowResp/ifmap_db/list",
@@ -216,7 +232,7 @@ func routeDetail(t *uitable.Table, e collection.Element) {
 		destvn, _ := path.Search("dest_vn/text()")
 		itf, _ := path.Search("nh/NhSandeshData/itf/text()")
 		t.AddRow("    "+utils.Pretty(nhs), utils.Pretty(peers), utils.Pretty(label),
-			 utils.Pretty(pref), utils.Pretty(itf), utils.Pretty(destvn))
+			utils.Pretty(pref), utils.Pretty(itf), utils.Pretty(destvn))
 	}
 	t.AddRow("")
 }
