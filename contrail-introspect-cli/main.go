@@ -7,9 +7,9 @@ import "log"
 import "github.com/jbowtie/gokogiri/xpath"
 import cli "gopkg.in/urfave/cli.v2"
 
-import "github.com/nlewo/contrail-introspect-cli/descriptions"
-import "github.com/nlewo/contrail-introspect-cli/utils"
-import "github.com/nlewo/contrail-introspect-cli/collection"
+import "github.com/minkimipt/contrail-introspect-cli/descriptions"
+import "github.com/minkimipt/contrail-introspect-cli/utils"
+import "github.com/minkimipt/contrail-introspect-cli/collection"
 
 func multiple(vrouter string, vrf_name string, count bool) {
 	url := "http://" + vrouter + ":8085" + "/Snh_PageReq?x=begin:-1,end:-1,table:" + vrf_name + ".uc.route.0,"
