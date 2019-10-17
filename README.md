@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/nlewo/contrail-introspect-cli.svg?branch=master)](https://travis-ci.org/nlewo/contrail-introspect-cli)
+[![Build Status](https://travis-ci.org/minkimipt/contrail-introspect-cli.svg?branch=master)](https://travis-ci.org/minkimipt/contrail-introspect-cli)
 
 CLI on ContraiL Introspects
 ===========================
@@ -6,10 +6,10 @@ CLI on ContraiL Introspects
 ## Installation
 
 You can download the latest 
-[contrail-introspect-cli binary](https://github.com/nlewo/contrail-introspect-cli-binaries/raw/master/contrail-introspect-cli)
+[contrail-introspect-cli binary](https://github.com/minkimipt/contrail-introspect-cli-binaries/raw/master/contrail-introspect-cli)
 or build it:
 
-    $ go get github.com/nlewo/contrail-introspect-cli/contrail-introspect-cli
+    $ go get github.com/minkimipt/contrail-introspect-cli/contrail-introspect-cli
 
 or for Nix users:
 

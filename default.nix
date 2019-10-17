@@ -4,7 +4,7 @@
 buildGoPackage {
   name = "contrail-introspect-cli-unstable";
 
-  goPackagePath = "github.com/nlewo/contrail-introspect-cli";
+  goPackagePath = "github.com/minkimipt/contrail-introspect-cli";
 
   buildInputs = [ pkgconfig libxml2 ];
 

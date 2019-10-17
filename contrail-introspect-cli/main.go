@@ -2,8 +2,8 @@ package main
 
 import "fmt"
 import "log"
-import "github.com/nlewo/contrail-introspect-cli/descriptions"
-import "github.com/nlewo/contrail-introspect-cli/collection"
+import "github.com/minkimipt/contrail-introspect-cli/descriptions"
+import "github.com/minkimipt/contrail-introspect-cli/collection"
 
 //import "reflect"
 

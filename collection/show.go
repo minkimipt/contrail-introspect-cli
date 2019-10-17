@@ -3,7 +3,7 @@ package collection
 import "fmt"
 import "log"
 import "github.com/gosuri/uitable"
-import "github.com/nlewo/contrail-introspect-cli/utils"
+import "github.com/minkimipt/contrail-introspect-cli/utils"
 
 // Several representations of resources
 type Shower interface {

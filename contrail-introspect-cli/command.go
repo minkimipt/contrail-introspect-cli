@@ -7,8 +7,8 @@ import "log"
 
 import cli "gopkg.in/urfave/cli.v2"
 
-import "github.com/nlewo/contrail-introspect-cli/collection"
-import "github.com/nlewo/contrail-introspect-cli/utils"
+import "github.com/minkimipt/contrail-introspect-cli/collection"
+import "github.com/minkimipt/contrail-introspect-cli/utils"
 
 func GenCommand(descCol collection.DescCollection, name string, usage string) *cli.Command {
 	return &cli.Command{
