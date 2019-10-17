@@ -7,8 +7,8 @@ import "log"
 
 import cli "gopkg.in/urfave/cli.v2"
 
-import "github.com/minkimipt/contrail-introspect-cli/collection"
-import "github.com/minkimipt/contrail-introspect-cli/utils"
+import "github.com/nlewo/contrail-introspect-cli/collection"
+import "github.com/nlewo/contrail-introspect-cli/utils"
 
 func GenCommand(descCol collection.DescCollection, name string, usage string) *cli.Command {
 	return &cli.Command{
@@ -16,6 +16,10 @@ func GenCommand(descCol collection.DescCollection, name string, usage string) *c
 		Usage:     usage,
 		ArgsUsage: fmt.Sprintf("%s\n", strings.Join(descCol.PageArgs, " ")),
 		Flags: []cli.Flag{
+			&cli.BoolFlag{
+				Name: "raw", Aliases: []string{"r"},
+				Usage: "Print the vars received from xml",
+			},
 			&cli.BoolFlag{
 				Name: "long", Aliases: []string{"l"},
 				Usage: "Long format",
@@ -85,6 +89,12 @@ func GenCommand(descCol collection.DescCollection, name string, usage string) *c
 			}
 			if c.IsSet("long") {
 				list.Long(c.Uint("max-col-width"))
+				return nil
+			}
+			if c.IsSet("raw") {
+				vars := []string{}
+				list.Vars(&vars)
+				fmt.Print(vars)
 				return nil
 			}
 			list.Short()
