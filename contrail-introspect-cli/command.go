@@ -92,7 +92,7 @@ func GenCommand(descCol collection.DescCollection, name string, usage string) *c
 				return nil
 			}
 			if c.IsSet("raw") {
-				vars := []string{}
+				vars := [][]string{}
 				list.Vars(&vars)
 				fmt.Print(vars)
 				return nil
