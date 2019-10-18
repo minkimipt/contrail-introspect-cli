@@ -13,10 +13,10 @@
 | check_contrail__vrouter_nodemgr | Global/Introspect | Check contrail-vrouter-nodemgr status | |
 | check_contrail__vrouter_smartnic | Global/Introspect | Check smartnic status using /opt/netronome/libexec/nfp-vrouter-status -r | |
 | check_contrail__vrouter_smartnic_metrics | Global/Introspect | Check smartnic metrics using /opt/netronome/libexec/nfp-vr-syscntrs.sh -z | |
-| check_contrail__vrouter_xmpp | Global/Introspect | Check number of XMPP sessions | |
+| check_contrail__vrouter_xmpp | Global/Introspect | Check number of XMPP sessions | all stats are delivered, count should be done by plugin |
 | check_contrail__vrouter_cpu | Global/Introspect | Check contrail-vrouter-agent cpu usage | done |
 | check_contrail__vrouter_memory | Global/Introspect | Check contrail-vrouter-agent memory usage | done |
-| check_contrail__vrouter_flaps | Global/Introspect | Check contrail-vrouter-agent for number of flaps | |
+| check_contrail__vrouter_flaps | Global/Introspect | Check contrail-vrouter-agent for number of flaps | done |
 | check_contrail__dropstats_invalid_source | Global/Introspect | Check dropstats for check_contrail__dropstats_invalid_source entry | |
 | check_contrail__dropstats_flow_queue_limit_exceeded | Global/Introspect | Check dropstats for check_contrail__dropstats_flow_queue_limit_exceeded entry | |
 | check_contrail__dropstats_drop_new_flow | Global/Introspect | Check dropstats for check_contrail__dropstats_drop_new_flow entry | |
