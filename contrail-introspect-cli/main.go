@@ -55,7 +55,9 @@ func main() {
 			Destination: &hosts_file,
 		}}
 	app.Commands = []*cli.Command{
+		GenCommand(descriptions.VrouterDropstats(), "vrouter-dropstats", "Show dropstats of vrouter"),
 		GenCommand(descriptions.AgentCpu(), "agent-cpu", "Query the agent about its cpu utilization"),
+		GenCommand(descriptions.AgentMemory(), "agent-memory", "Query the agent about its memory utilization"),
 		GenCommand(descriptions.CtrlIfmap(), "controller-ifmap", "Query the ifmap through the controller"),
 		GenCommand(descriptions.AgentPing(), "agent-ping", "Generate tcp ping in a vrf"),
 		GenCommand(descriptions.Route(), "agent-route", "Show routes on agent"),
