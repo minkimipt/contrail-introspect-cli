@@ -66,7 +66,13 @@ func (col Collection) Long(maxColWidth uint) {
 	}
 }
 func (col Collection) Vars(slice *[][]string) {
-	Elements(col.elements).Vars(slice)
+	switch col.descCol.DescElt.LongDetail.(type) {
+	case LongFormatFn:
+		log.Fatal("raw output is not provided for " + col.descCol.PageArgs[0])
+		return
+	default:
+		Elements(col.elements).Vars(slice)
+	}
 }
 func (elts Elements) Long(maxColWidth uint) {
 	table := uitable.New()
@@ -92,14 +98,12 @@ func (elts Elements) Vars(slice *[][]string) {
 
 // This is used to show the long version of an Element.
 type LongFormatter interface {
-	//LongFormat(t *uitable.Table, f Format, e Element, slice *[][]string)
 	LongFormat(t interface{}, f Format, e Element)
 }
 
 type LongFormatFn (func(*uitable.Table, Element))
 type LongFormatValuesFn (func(*[]string, Element))
 type LongFormatXpaths []string
-type LongFormatValuesXpaths []string
 
 type Format uint8
 
@@ -125,17 +129,6 @@ func (xpaths LongFormatXpaths) LongFormat(table interface{}, format Format, e El
 		*local_slice = append(*local_slice, (utils.Pretty(s)))
 	}
 }
-
-//TODO: here it would be ideal if we could pass an *[]slice type instead of *uitable.Table here,
-//but this requires interface to be introduced on the level where LongFormat is defined.
-//func (xpaths LongFormatValuesXpaths) LongFormat(table interface{}, format Format, e Element) {
-//	for _, xpath := range xpaths {
-//		s, _ := e.Node.Search(xpath + "/text()")
-//		if len(s) == 1 {
-//			*table = append(*slice, utils.Pretty(s))
-//		}
-//	}
-//}
 
 func createTableFromVars(keys []string, values [][]string) {
 	table := uitable.New()
