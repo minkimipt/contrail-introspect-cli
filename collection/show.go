@@ -99,6 +99,7 @@ func (elts Elements) Vars(slice *[][]string) {
 // This is used to show the long version of an Element.
 type LongFormatter interface {
 	LongFormat(t interface{}, f Format, e Element)
+	GetFields() []string
 }
 
 type LongFormatFn (func(*uitable.Table, Element))
@@ -112,6 +113,24 @@ const (
 	FORMAT_TABLE_HEADER Format = 2
 	FORMAT_TABLE        Format = 3
 )
+
+func (fn LongFormatFn) GetFields() []string {
+	fmt.Println("This is not implemented")
+	return []string{}
+}
+
+func (fn LongFormatValuesFn) GetFields() []string {
+	fmt.Println("This is not implemented")
+	return []string{}
+}
+
+func (xpaths LongFormatXpaths) GetFields() []string {
+	return_slice := make([]string, len(xpaths))
+	for i, xpath := range xpaths {
+		return_slice[i] = xpath
+	}
+	return return_slice
+}
 
 func (fn LongFormatFn) LongFormat(table interface{}, format Format, e Element) {
 	fn(table.(*uitable.Table), e)
