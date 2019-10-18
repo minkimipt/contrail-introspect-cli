@@ -8,6 +8,22 @@ import "github.com/gosuri/uitable"
 import "github.com/minkimipt/contrail-introspect-cli/utils"
 import "github.com/minkimipt/contrail-introspect-cli/collection"
 
+func AgentMemory() collection.DescCollection {
+	return collection.DescCollection{
+		BaseXpath: "CpuLoadInfoResp/cpu_info/CpuLoadInfo/sys_mem_info",
+		DescElt: collection.DescElement{
+			ShortDetailXpath: "used/text()",
+			LongDetail:       collection.LongFormatXpaths([]string{"total", "used", "free", "buffers", "cached", "node_type"}),
+		},
+		PageArgs: []string{"vrouter-fqdn"},
+		PageBuilder: func(args []string) collection.Sourcer {
+			path := fmt.Sprintf("Snh_CpuLoadInfoReq")
+			return collection.Webui{Path: path, VrouterUrl: args[0], Port: 8085}
+		},
+		PrimaryField: "used",
+	}
+}
+
 func AgentCpu() collection.DescCollection {
 	return collection.DescCollection{
 		BaseXpath: "CpuLoadInfoResp/cpu_info/CpuLoadInfo/cpuload",
