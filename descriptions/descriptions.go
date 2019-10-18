@@ -8,6 +8,22 @@ import "github.com/gosuri/uitable"
 import "github.com/minkimipt/contrail-introspect-cli/utils"
 import "github.com/minkimipt/contrail-introspect-cli/collection"
 
+func VrouterDropstats() collection.DescCollection {
+	return collection.DescCollection{
+		BaseXpath: "",
+		DescElt: collection.DescElement{
+			ShortDetailXpath: "ds_rid/text()",
+			LongDetail:       collection.LongFormatXpaths([]string{"ds_arp_not_me", "ds_cksum_err", "ds_cloned_original", "ds_discard", "ds_drop_new_flow", "ds_duplicated", "ds_flow_action_drop", "ds_flow_action_invalid", "ds_flow_evict", "ds_flow_invalid_protocol", "ds_flow_nat_no_rflow", "ds_flow_no_memory", "ds_flow_queue_limit_exceeded", "ds_flow_table_full", "ds_flow_unusable", "ds_frag_err", "ds_head_alloc_fail", "ds_interface_drop", "ds_interface_rx_discard", "ds_interface_tx_discard", "ds_invalid_arp", "ds_invalid_if", "ds_invalid_label", "ds_invalid_mcast_source", "ds_invalid_nh", "ds_invalid_packet", "ds_invalid_protocol", "ds_invalid_source", "ds_invalid_vnid", "ds_l2_no_route", "ds_mcast_clone_fail", "ds_mcast_df_bit", "ds_misc", "ds_no_fmd", "ds_no_memory", "ds_nowhere_to_go", "ds_pcow_fail", "ds_pull", "ds_push", "ds_rewrite_fail", "ds_rid", "ds_trap_no_if", "ds_ttl_exceeded", "ds_vlan_fwd_enq", "ds_vlan_fwd_tx"}),
+		},
+		PageArgs: []string{"vrouter-fqdn"},
+		PageBuilder: func(args []string) collection.Sourcer {
+			path := fmt.Sprintf("Snh_KDropStatsReq")
+			return collection.Webui{Path: path, VrouterUrl: args[0], Port: 8085}
+		},
+		PrimaryField: "KDropStatsResp",
+	}
+}
+
 func AgentMemory() collection.DescCollection {
 	return collection.DescCollection{
 		BaseXpath: "CpuLoadInfoResp/cpu_info/CpuLoadInfo/sys_mem_info",
