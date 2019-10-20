@@ -54,25 +54,14 @@ func main() {
 			Usage:       "host file to do DNS resolution",
 			Destination: &hosts_file,
 		}}
-	app.Commands = []*cli.Command{
-		GenCommand(descriptions.VrouterDropstats(), "vrouter-dropstats", "Show dropstats of vrouter"),
-		GenCommand(descriptions.AgentCpu(), "agent-cpu", "Query the agent about its cpu utilization"),
-		GenCommand(descriptions.AgentMemory(), "agent-memory", "Query the agent about its memory utilization"),
-		GenCommand(descriptions.CtrlIfmap(), "controller-ifmap", "Query the ifmap through the controller"),
-		GenCommand(descriptions.AgentPing(), "agent-ping", "Generate tcp ping in a vrf"),
-		GenCommand(descriptions.Route(), "agent-route", "Show routes on agent"),
-		GenCommand(descriptions.Interface(), "agent-itf", "Show interfaces on agent"),
-		GenCommand(descriptions.Si(), "agent-si", "Show service instances on agent"),
-		GenCommand(descriptions.Vrf(), "agent-vrf", "Show vrfs on agent "),
-		GenCommand(descriptions.Peering(), "agent-peering", "Peering with controller on agent"),
-		GenCommand(descriptions.Vn(), "agent-vn", "Show virtual networks on agent"),
-		GenCommand(descriptions.Mpls(), "agent-mpls", "Show mpls on agent"),
+	app.Commands = []*cli.Command{}
+	for _, command := range descriptions.Commands {
+		app.Commands = append(app.Commands, GenCommand(command.DescFn, command.Name, command.Help))
+	}
+	Commands_other := []*cli.Command{
 		descriptions.Ping(),
 		descriptions.Follow(),
 		descriptions.Path(),
-		GenCommand(descriptions.RiSummary(), "controller-ri", "Show routing instances on controller"),
-		GenCommand(descriptions.CtrlRoute(), "controller-route", "Show routes on controller"),
-		GenCommand(descriptions.CtrlRouteSummary(), "controller-route-summary", "Show routes summary on controller"),
 		{
 			Name:      "agent-multiple",
 			Usage:     "List routes with multiple nexthops",
@@ -94,5 +83,6 @@ func main() {
 		},
 		descriptions.RouteDiff(),
 	}
+	app.Commands = append(app.Commands, Commands_other...)
 	app.Run(os.Args)
 }
