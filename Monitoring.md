@@ -13,7 +13,7 @@
 | check_contrail__vrouter_nodemgr | Global/Introspect | Check contrail-vrouter-nodemgr status | |
 | check_contrail__vrouter_smartnic | Global/Introspect | Check smartnic status using /opt/netronome/libexec/nfp-vrouter-status -r | |
 | check_contrail__vrouter_smartnic_metrics | Global/Introspect | Check smartnic metrics using /opt/netronome/libexec/nfp-vr-syscntrs.sh -z | |
-| check_contrail__vrouter_xmpp | Global/Introspect | Check number of XMPP sessions | all stats are delivered, count should be done by plugin |
+| check_contrail__vrouter_xmpp | Global/Introspect | Check number of XMPP sessions | done |
 | check_contrail__vrouter_cpu | Global/Introspect | Check contrail-vrouter-agent cpu usage | done |
 | check_contrail__vrouter_memory | Global/Introspect | Check contrail-vrouter-agent memory usage | done |
 | check_contrail__vrouter_flaps | Global/Introspect | Check contrail-vrouter-agent for number of flaps | done |
