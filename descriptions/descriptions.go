@@ -8,6 +8,35 @@ import "github.com/gosuri/uitable"
 import "github.com/minkimipt/contrail-introspect-cli/utils"
 import "github.com/minkimipt/contrail-introspect-cli/collection"
 
+// Create new command with all neccesary fields
+//
+// func CommandName() collection.DescCollection {
+// 	return collection.DescCollection{
+//    // Search using this xpath should return a container - PrimaryField that has list of fields that have parameters taht this command will be displaying, if fields are found directly in the highest hierarchy container, this should be set to ""
+// 		BaseXpath: "",
+//    // This is XML tag of container that has a list of other containers that are holding data that we want to display
+// 		PrimaryField: "KDropStatsResp",
+// 		DescElt: collection.DescElement{
+//      // This should contain a field that will be displayed in short variant of this command
+// 			ShortDetailXpath: "ds_rid/text()",
+//      // This should contain either of  collection.LongFormatXpaths([]string), collection.LongFormatFn(func(*uitable.Table, Element)), collection.LongFormatValuesFn(func(*uitable.Table, Element))
+//      // collection.LongFormatXpaths([]string) - expects that search for BaseXpath returns a container with flat list of other containers that have all necessary fields, will look up every string from specified slice and return their values
+//      // collection.LongFormatFn(func(*uitable.Table, Element)) - expects that search for BaseXpath returns a container with complex structure, will call helper function to parse it
+//      // collection.LongFormatValuesFn(func(*uitable.Table, Element)) - expects that search for BaseXpath returns a container with complex structure, will call helper function to parse it, this will work only for raw output specified by --raw cli option
+// 			LongDetail:       collection.LongFormatXpaths([]string{"ds_arp_not_me", "ds_rid"}),
+// 		},
+//    // This function returns one of collection.Webui or collection.Remote, each one has its own Load method to get data from introspect.
+//    // Webui - gets its data from arbitrary introspect URL, as specified in the path variable
+//    // Remote - gets its data from Snh_PageReq by specifying a table to query
+// 		PageBuilder: func(args []string) collection.Sourcer {
+// 			path := fmt.Sprintf("Snh_KDropStatsReq")
+// 			return collection.Webui{Path: path, VrouterUrl: args[0], Port: 8085}
+// 		},
+// 		// These are arguments to the function specified in PageBuilder, they will also become positional command line arguments
+// 		PageArgs: []string{"vrouter-fqdn"},
+// 	}
+// }
+
 func VrouterDropstats() collection.DescCollection {
 	return collection.DescCollection{
 		BaseXpath: "",
